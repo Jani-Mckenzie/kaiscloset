@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AuthModule } from './components/auth/auth.module'
+
+
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailsComponent } from './components/items/item-details/item-details.component';
-import { SigninComponent } from './components/home/signin/signin.component';
+
 import { HeaderComponent } from './components/header/header.component';
 import { ItemFilterComponent } from './components/items/item-filter/item-filter.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthComponent } from './components/auth/auth.component';
+
+import { AdduserComponent } from './components/adduser/adduser.component';
+import { CartComponent } from './components/cart/cart.component';
+
 
 @NgModule({
   declarations: [
@@ -19,10 +27,15 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     ItemsComponent,
     ItemDetailsComponent,
-    SigninComponent,
+
     HeaderComponent,
     ItemFilterComponent,
     FooterComponent,
+    AuthComponent,
+    AdduserComponent,
+    CartComponent,
+
+
 
   ],
   imports: [
@@ -30,6 +43,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    AuthModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

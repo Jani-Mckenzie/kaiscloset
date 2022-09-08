@@ -1,0 +1,46 @@
+<div class="relative my-6 mx-auto w-[40%] bg-black ">
+    <!--content-->
+    <div class="">
+        <!--header-->
+        <div class="flex justify-center pt-3 text-white">
+            <p>ADD USER</p>
+        </div>
+    </div>
+    <!--body-->
+    <div class="text-white relative p-6">
+
+
+        <form [formGroup]="userForm" class="grid" (ngSubmit)="createUser()">
+            <div class="grid grid-rows-3 gap-4 content-start pb-8">
+                <div> <label for="name">Name</label>
+                    <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="name" type="text">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="email" type="text">
+                    <div *ngIf="isValidInput('email')" class=" text-sm">
+                        <div *ngIf="userForm.controls['email'].errors.required">
+                            Email is required.
+                        </div>
+                        <div *ngIf="userForm.controls['email'].errors.pattern">
+                            Must be a valid email format.
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="role">Role</label>
+                    <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="role" type="text">
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="password" type="text">
+                </div>
+            </div>
+
+
+            <button class="outline w-[50%] place-self-center py-2" type="submit" [disabled]="!userForm.valid">Sign
+                In</button>
+        </form>
+    </div>
+    <!--footer-->
+</div>

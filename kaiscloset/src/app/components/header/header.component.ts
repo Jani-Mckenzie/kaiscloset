@@ -1,4 +1,10 @@
+import * as AOS from "aos";
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from "src/app/services/user.service";
+import { User } from '../../models/user'
 
 @Component({
   selector: 'app-header',
@@ -6,10 +12,47 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  displayadduser = false;
+  displayadditem = false;
+  currentRole: any;
+  currentUser: any;
+  user: User[] = [];
+  isLoggedIn = false;
+  constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private userService: UserService) {
 
-  constructor() { }
+  }
+
+
 
   ngOnInit(): void {
+    this.getCurrentUser();
+    this.isLoggedIn = this.authService.isAuthenticated();
+    this.addUserDisplay((localStorage.getItem('role')));
+    this.authService.updateMenu.subscribe(res => {
+      this.addUserDisplay(localStorage.getItem('role'));
+    })
+
+  }
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth/login'], { queryParams: { loggedOut: 'success' } });
+  }
+
+  getCurrentUser() {
+    this.currentUser = localStorage.getItem('auth_meta')
+    this.currentUser = JSON.parse(this.currentUser)
+    const id = this.currentUser.id;
+    console.log(id);
+    this.userService.getUserById(this.currentUser.id).subscribe(data => {
+      this.currentUser = data.data!['user'];
+      console.log(this.currentUser, 'worked again')
+      this.addUserDisplay(this.currentUser.role)
+    })
+  }
+
+  addUserDisplay(role: any) {
+    this.displayadditem = role == 'admin'
+    this.displayadduser = role == 'admin'
   }
 
 }

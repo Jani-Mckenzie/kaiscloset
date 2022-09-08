@@ -4,12 +4,14 @@
             Free shipping
             on all
             orders
-            $50ssdsadasd
+            $50
             and above.
         </div>
 
 
         <img src="\assets\images\logo.png" alt="" class="p-8 justify-self-center">
+        <div>
+        </div>
     </div>
 
 
@@ -31,14 +33,29 @@
                     fill="black" />
             </svg>
 
-            <a href="/" class="flex">Sign In<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+            <button *ngIf="!isLoggedIn" routerLink="/auth/login" routerLinkActive="active" class="flex">Sign
+                In<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M7.5 7.5C7.5 9.981 9.519 12 12 12C14.481 12 16.5 9.981 16.5 7.5C16.5 5.019 14.481 3 12 3C9.519 3 7.5 5.019 7.5 7.5ZM20 22H21V21C21 17.141 17.859 14 14 14H10C6.14 14 3 17.141 3 21V22H20Z"
                         fill="black" />
                 </svg>
-            </a>
+            </button>
 
+        </div>
+        <div *ngIf="isLoggedIn">
+            <div class="navbar">
+                <div class="dropdown">
+                    <button class="dropbtn">Dropdown
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a *ngIf="displayadduser" href="adduser">Add User</a>
+                        <a *ngIf="displayadditem" href="additem">Add Item</a>
+                        <a *ngIf="isLoggedIn" href="profile">Profile</a>
+                        <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 

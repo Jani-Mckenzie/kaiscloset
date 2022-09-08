@@ -18,8 +18,7 @@ export class ItemsComponent implements OnInit {
 
   getItems() {
     this.itemsService.getAllItems().subscribe(results => {
-      this.items = results.data['items'];
-      console.log(this.items);
+      this.items = results.data!['items'];
     });
 
   }

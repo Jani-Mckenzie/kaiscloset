@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Must provide a name"],
     },
     email: {
       type: String,
@@ -17,10 +16,6 @@ const userSchema = new mongoose.Schema(
       required: [true, "Must provide a password"],
       minlength: [8, "Password must be at least 8 characters long"],
       select: false,
-    },
-
-    phoneNumber: {
-      type: Number,
     },
     role: {
       type: String,

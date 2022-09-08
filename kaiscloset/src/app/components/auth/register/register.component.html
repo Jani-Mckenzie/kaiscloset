@@ -1,0 +1,63 @@
+<div *ngIf="!showModal">
+    <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex w-[100%]">
+        <div class="relative my-6 mx-auto w-[40%]">
+            <!--content-->
+            <div class="border-0 rounded-lg relative flex flex-col w-full bg-black outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex justify-end pt-3">
+                    <div class="cursor-pointer" (click)="show()">
+                        <svg width="40" height="28" viewBox="0 0 45 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M26.2096 23.5L44.8644 0.944325C45.1771 0.569479 44.9142 0 44.4309 0H38.7599C38.4258 0 38.106 0.15138 37.8857 0.410889L22.5 19.0163L7.11426 0.410889C6.90106 0.15138 6.58126 0 6.24015 0H0.569096C0.0858487 0 -0.177095 0.569479 0.135594 0.944325L18.7904 23.5L0.135594 46.0557C0.0655489 46.1392 0.0206122 46.2414 0.00611736 46.3501C-0.00837746 46.4588 0.00817847 46.5694 0.0538213 46.6688C0.0994642 46.7683 0.172277 46.8523 0.263613 46.911C0.354949 46.9697 0.460972 47.0006 0.569096 47H6.24015C6.57416 47 6.89395 46.8486 7.11426 46.5891L22.5 27.9837L37.8857 46.5891C38.0989 46.8486 38.4187 47 38.7599 47H44.4309C44.9142 47 45.1771 46.4305 44.8644 46.0557L26.2096 23.5Z"
+                                fill="white" />
+                        </svg>
+
+                    </div>
+                </div>
+                <!--body-->
+                <div class="text-white relative p-6">
+
+                    <div class="">
+                        <h1 class="pb-4 font-bold text-lg">REGISTER</h1>
+                        <p class="pb-8 font-thin"> New to The Kai’s Closet? Create an
+                            account now to get exclusive rewards.
+                        </p>
+                    </div>
+
+                    <form [formGroup]="userForm" class="grid">
+                        <div class="grid grid-rows-3 gap-4 content-start pb-12">
+                            <div> <label for="name">Name</label>
+                                <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="name"
+                                    type="text">
+                            </div>
+                            <div>
+                                <label for="email">Email</label>
+                                <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="email"
+                                    type="text">
+                            </div>
+                            <div>
+                                <label for="password">Password</label>
+                                <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="password"
+                                    type="password">
+                            </div>
+                        </div>
+                        <div class="pb-12 font-thin text-sm">
+                            <p>By signing in to your account, you agree to our <a
+                                    class="underline underline-offset-[5px]" href="">Privacy
+                                    Policy</a> and <a class="underline underline-offset-[5px]" href="">Terms &
+                                    Conditions.</a>
+                            </p>
+                        </div>
+
+                        <button class="outline w-[50%] place-self-center py-2" type="submit"
+                            [disabled]="!userForm.valid" (click)="register()">Sign
+                            In</button>
+                    </form>
+                </div>
+                <!--footer-->
+            </div>
+        </div>
+    </div>
+    <div class="opacity-50 fixed inset-0 z-40 bg-black" data-aos="flip-up"></div>
+</div>

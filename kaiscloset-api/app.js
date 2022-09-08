@@ -13,13 +13,16 @@ const app = express();
 
 //Routers
 const userRouter = require("./routes/userRouter");
-const adminRouter = require("./routes/adminRouter");
 const itemRouter = require("./routes/itemRouter");
 const globalErrorHandler = require("./controllers/errorcontroller");
 
 //MIDDLEWARES
 
+
+
 app.use(cors());
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // const adminsRouter = require("./routes/adminsRotuer");
@@ -36,7 +39,6 @@ mongoose
 
 // Routes
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/admins", adminRouter);
 app.use("/api/v1/items", itemRouter);
 app.get("/", (req, res) => {
   res.send("Request Received");
