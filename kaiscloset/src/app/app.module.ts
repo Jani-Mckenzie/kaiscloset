@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthModule } from './components/auth/auth.module'
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,8 @@ import { AuthComponent } from './components/auth/auth.component';
 import { AdduserComponent } from './components/adduser/adduser.component';
 import { CartComponent } from './components/cart/cart.component';
 
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AdditemComponent } from './components/additem/additem.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,13 @@ import { CartComponent } from './components/cart/cart.component';
     HomeComponent,
     ItemsComponent,
     ItemDetailsComponent,
-
     HeaderComponent,
     ItemFilterComponent,
     FooterComponent,
     AuthComponent,
     AdduserComponent,
     CartComponent,
+    AdditemComponent,
 
 
 
@@ -46,7 +48,7 @@ import { CartComponent } from './components/cart/cart.component';
     AuthModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

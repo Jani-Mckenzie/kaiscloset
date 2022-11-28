@@ -1,1 +1,11 @@
-<p>item-details works!</p>
+<div class="flex justify-center">
+    <div class="card" class="h-[50vh] w-[250px] font-inter cursor-pointerz" data-aos="fade-up">
+        <div> <img [src]="item.url" alt="" class="h-[32vh]"></div>
+        <div class="grid">
+            <span class="font-extrabold text-[1.3rem]">{{item.name}}</span>
+            <span class="font-extralight">{{item.description}}</span>
+            <span class="font-bold text-[1rem]">{{item.price|currency}}</span>
+        </div>
+    </div>
+
+</div>

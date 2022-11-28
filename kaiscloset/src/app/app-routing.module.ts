@@ -6,6 +6,7 @@ import { ItemsComponent } from './components/items/items.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { AdduserComponent } from './components/adduser/adduser.component';
 import { RoleGuard } from './components/auth/role.guard';
+import { AdditemComponent } from './components/additem/additem.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'items', component: ItemsComponent },
   { path: 'item-details/:id', component: ItemDetailsComponent },
-  { path: 'adduser', component: AdduserComponent, canActivate: [RoleGuard] }
+  { path: 'adduser', component: AdduserComponent, canActivate: [RoleGuard] },
+  { path: 'additem', component: AdditemComponent, canActivate: [RoleGuard] }
 ];
 
 @NgModule({

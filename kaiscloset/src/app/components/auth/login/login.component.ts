@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         this.user = data.data.user;
         localStorage.setItem('role', this.user.role);
-        this.authService.updateMenu.next();
+        this.authService.loggedInUser$.next(this.user);
         this.router.navigate(['/home'], { queryParams: { loggedin: 'success' } });
       },
         (errorResponse) => {

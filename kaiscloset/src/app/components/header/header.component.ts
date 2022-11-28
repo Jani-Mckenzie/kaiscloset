@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   currentRole: any;
   currentUser: any;
   user: User[] = [];
-  isLoggedIn = false;
+  loggedInUser?: User;
   constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private userService: UserService) {
 
   }
@@ -26,13 +26,17 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
-    this.isLoggedIn = this.authService.isAuthenticated();
     this.addUserDisplay((localStorage.getItem('role')));
-    this.authService.updateMenu.subscribe(res => {
-      this.addUserDisplay(localStorage.getItem('role'));
-    })
 
+    this.authService.loggedInUser$.subscribe(res => {
+      this.loggedInUser = res;
+      this.addUserDisplay(localStorage.getItem('role'));
+    });
+
+    this.authService.autoLogin();
   }
+
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/auth/login'], { queryParams: { loggedOut: 'success' } });
@@ -53,6 +57,10 @@ export class HeaderComponent implements OnInit {
   addUserDisplay(role: any) {
     this.displayadditem = role == 'admin'
     this.displayadduser = role == 'admin'
+  }
+
+  cart() {
+    window.alert('Coming Soon')
   }
 
 }

@@ -28,7 +28,7 @@ export class ItemsService {
 
 
   getItemById(id: string): Observable<APIResponse<Items>> {
-    return this.http.get<APIResponse<Items>>(this.API_URL + '/' + id).pipe(catchError(this._handleHttpErrors(new Items())));
+    return this.http.get<APIResponse<Items>>(this.API_URL + '/' + id).pipe(catchError(this._handleHttpErrors([])));
   }
 
   createItem(data: Items): Observable<APIResponse<Items>> {
@@ -36,7 +36,7 @@ export class ItemsService {
   }
 
   updateItem(id: string, data: Items): Observable<APIResponse<Items>> {
-    return this.http.put<APIResponse<Items>>(this.API_URL + '/' + id, data).pipe(catchError(this._handleHttpErrors(new Items())));
+    return this.http.patch<APIResponse<Items>>(this.API_URL + '/' + id, data).pipe(catchError(this._handleHttpErrors(new Items())));
   }
 
   deleteItem(id: string): Observable<APIResponse<Items>> {

@@ -1,25 +1,15 @@
-<div class="hero h-full grid grid-cols-[1fr,3fr] my-[10vh]">
-    <div>
-        <div class="border border-b-0 border-t-0 border-r-8 w-[50%] h-full font-inter font-bold text-[1rem] ">
-            <div class="grid h-[25vh] p-8 gap-4 ">
-                <div class=" "> <input type="checkbox" name=""> Tops</div>
-                <div class=" "> <input type="checkbox" name=""> Bottoms</div>
-                <div class=" "> <input type="checkbox" name=""> Shoes</div>
-            </div>
-        </div>
-
-
-    </div>
-    <div class=" h-full grid grid-cols-3 font-inter content-end">
-        <div class="card" *ngFor="let item of items" class="h-[50vh] w-[250px] font-inter cursor-pointerz">
+<div class="hero h-full grid grid-cols-[1fr] my-[10vh]">
+    <div class=" h-full grid grid-cols-3 font-inter content-end mx-auto gap-x-[300px]">
+        <div class="card" *ngFor="let item of filteredList" class="h-[50vh] w-[250px] font-inter cursor-pointerz"
+            data-aos="fade-up">
             <div> <img [src]="item.url" alt="" class="h-[32vh]"></div>
             <div class="grid">
                 <span class="font-extrabold text-[1.3rem]">{{item.name}}</span>
                 <span class="font-extralight truncate ... ">{{item.description}}</span>
                 <span class="font-bold text-[1rem]">{{item.price | currency}}</span>
 
-                <button
-                    class="outline-none opacity-0.5 outline-black hover:opacity-100 hover:bg-black hover:text-white">View
+                <button class="outline-none opacity-0.5 outline-black hover:opacity-100 hover:bg-black hover:text-white"
+                    [routerLink]=" '/item-details/'+ item._id">View
                     Details</button>
             </div>
         </div>

@@ -4,6 +4,7 @@ import { Observable, catchError, of, tap, Subject } from 'rxjs';
 import { User } from '../models/user'
 import { APIResponse } from '../models/api-response';
 import * as moment from 'moment';
+import { UserService } from '../services/user.service';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -35,25 +36,36 @@ export class AuthService {
     };
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
+
     this.decodedToken = localStorage.getItem('auth_meta') || new DecodedToken();
-    // this.decodedToken = localStorage.getItem(JSON.parse('user')) || new DecodedToken();
   }
-  private _updateMenu = new Subject<void>();
-
-  get updateMenu() {
-    return this._updateMenu;
-
+  private _loggedInUser$ = new Subject<User | undefined>();
+  get loggedInUser$() {
+    return this._loggedInUser$;
   }
 
   public login(userData: any) {
     return this.http.post<APIResponse<User>>(`${this.API_URL}` + 'login', userData).pipe(tap(data => {
-      this.getRole(data.data!['user.role'])
       if (data.status == 'success') {
+        this.getRole(data.data!['user.role'])
         this.saveToken(data.data!['token'])
-
       }
     }), catchError(this._handleHttpErrors(new User())));
+  }
+
+  public autoLogin(): void {
+    const dataFromStorage = localStorage.getItem('auth_meta')
+    if (!dataFromStorage) return;
+
+    const data = JSON.parse(dataFromStorage);
+    this.userService.getUserById(data.id).subscribe(res => {
+
+      if (res.status == 'success') {
+        this.loggedInUser$.next(res.data!['user']);
+      }
+    });
+
 
   }
 
@@ -61,13 +73,11 @@ export class AuthService {
     this.decodedToken = jwt.decodeToken(token);
     localStorage.setItem('auth_tkn', token);
     localStorage.setItem('auth_meta', JSON.stringify(this.decodedToken));
-    return token;
+  }
+  getToken() {
+    return localStorage.getItem('auth_tkn')
   }
 
-  // private saveUser(user: any): any {
-  //   localStorage.setItem('user', JSON.stringify('user'));
-
-  // }
 
   register(userData: any) {
     return this.http.post(`${this.API_URL}` + 'signUp', userData)
@@ -81,9 +91,10 @@ export class AuthService {
     localStorage.removeItem('auth_tkn');
     localStorage.removeItem('auth_meta');
     localStorage.removeItem('role');
-
+    this.loggedInUser$.next(undefined);
     this.decodedToken = new DecodedToken();
   }
+
   isAuthenticated(): boolean {
     return moment().isBefore(moment.unix(this.decodedToken.exp));
   }

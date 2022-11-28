@@ -36,7 +36,7 @@ export class UserService {
   }
 
   updateUser(id: string, data: User): Observable<APIResponse<User>> {
-    return this.http.put<APIResponse<User>>(this.API_URL + '/' + id, data).pipe(catchError(this._handleHttpErrors(new User())));
+    return this.http.patch<APIResponse<User>>(this.API_URL + '/' + id, data).pipe(catchError(this._handleHttpErrors(new User())));
   }
 
   deleteUser(id: string): Observable<APIResponse<User>> {

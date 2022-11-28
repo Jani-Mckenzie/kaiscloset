@@ -1,0 +1,165 @@
+<div class="flex h-[full] ">
+    <div class="grid grid-cols-4 gap-10 mr-20 h-[100vh] overflow-x-hidden overflow-y-auto">
+        <h3 class="font-bold text-lg">Boys</h3>
+        <h3 class="font-bold text-lg">Girls</h3>
+        <h3 class="font-bold text-lg">Men</h3>
+        <h3 class="font-bold text-lg">Women</h3>
+
+        <div class="grid col-span-4">
+            <div class="grid grid-cols-4 gap-20 h-[50%] " *ngFor="let item of items" [ngSwitch]="item.type">
+                <ul class=" group grid grid-rows-auto gap-2 items-center border-2 h-[15vh] w-[8vw] ">
+                    <li class=" grid gap-2 items-center pb-2">
+                        <ng-template class=" grid gap-2 items-center" ngSwitchCase="boy">
+
+                            <div>
+                                <div>
+                                    <img [src]="item.url" class="w-[5vh] h-[5vh]">
+                                    <span>{{item.name}}</span>
+                                </div>
+
+                                <div class="transition opacity-0 group-hover:opacity-100">
+                                    <button class="pr-2" (click)="toggleEditForm(item._id!)">
+                                        edit
+                                    </button>
+                                    <button (click)="deleteItem(item._id!)">
+                                        delete
+                                    </button>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <ul class="group grid gap-2 items-center capitalize">
+                    <li>
+                        <ng-template ngSwitchCase="girl">
+
+                            <div>
+                                <div>
+                                    <img [src]="item.url" class="w-[5vh] h-[5vh]">
+                                    <span>{{item.name}}</span>
+                                </div>
+
+                                <div class="transition opacity-0 group-hover:opacity-100">
+                                    <button class="pr-2" (click)="toggleEditForm(item._id!)">
+                                        edit
+                                    </button>
+                                    <button (click)="deleteItem(item._id!)">
+                                        delete
+                                    </button>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <ul class="group grid gap-2 items-center capitalize">
+                    <li>
+                        <ng-template ngSwitchCase="men">
+
+                            <div>
+                                <div>
+                                    <img [src]="item.url" class="w-[5vh] h-[5vh]">
+                                    <span>{{item.name}}</span>
+                                </div>
+
+                                <div class="transition opacity-0 group-hover:opacity-100">
+                                    <button class="pr-2" (click)="toggleEditForm(item._id!)">
+                                        edit
+                                    </button>
+                                    <button (click)="deleteItem(item._id!)">
+                                        delete
+                                    </button>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <ul class="group grid gap-2 items-center capitalize">
+                    <li>
+                        <ng-template ngSwitchCase="women">
+
+                            <div>
+                                <div>
+                                    <img [src]="item.url" class="w-[5vh] h-[5vh]">
+                                    <span>{{item.name}}</span>
+                                </div>
+
+                                <div class="transition opacity-0 group-hover:opacity-100">
+                                    <button class="pr-2" (click)="toggleEditForm(item._id!)">
+                                        edit
+                                    </button>
+                                    <button (click)="deleteItem(item._id!)">
+                                        delete
+                                    </button>
+                                </div>
+
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="relative my-6 w-[30%] bg-black rounded-lg">
+        <!--content-->
+        <div class="">
+            <!--header-->
+            <div class="flex justify-center pt-3 text-white">
+                <p *ngIf="!isEditing">ADD USER</p>
+                <p *ngIf="isEditing">EDIT USER</p>
+            </div>
+        </div>
+        <!--body-->
+        <div class="text-white relative p-6">
+
+
+            <form [formGroup]="itemForm" class="grid" (ngSubmit)="!isEditing ? createItem() : updateItem()"
+                (reset)="resetForm()">
+                <div class="grid grid-rows-3 gap-4 content-start pb-8">
+                    <div> <label for="name">Name</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="name" type="text">
+                    </div>
+                    <div> <label for="description">Description</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="description" type="text">
+                    </div>
+                    <div> <label for="category">Category</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="category" type="text">
+                    </div>
+                    <div> <label for="price">Price</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="price" type="text">
+                    </div>
+                    <div> <label for="url">Url</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="url" type="text">
+                    </div>
+                    <div> <label for="type">Type</label>
+                        <input class="bg-black outline outline-1 p-2 w-[97%]" formControlName="type" type="text">
+                    </div>
+
+                </div>
+
+
+                <button class="outline w-[50%] place-self-center py-2 rounded-lg" type="submit">
+                    {{!isEditing ? "ADD" : "EDIT"}} ITEM
+                </button>
+                <button type="reset" *ngIf="isEditing">Cancel</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>

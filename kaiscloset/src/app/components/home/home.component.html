@@ -1,5 +1,8 @@
 <div class="grid grid-rows-[1fr,0.5fr,1fr,2fr] gap-4 p-20 px-[5%] p w-[85%] m-auto justify-items-center mb-20">
-  <div> <a href=""><img src="\assets\images\banner1.png" alt="" data-aos="fade-right" data-aos-offset="200"
+
+  <div>
+
+    <a href=""><img src="\assets\images\banner1.png" alt="" data-aos="fade-right" data-aos-offset="200"
         data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true"
         data-aos-once="false"></a>
   </div>
@@ -8,9 +11,11 @@
 
     <p class="pb-2">Shop what you love-faster and easier</p>
 
-    <button routerLink="/auth/login" routerLinkActive="active" class="outline outline-black p-4">Sign
-      in or Create an
-      Account</button>
+    <button [routerLink]="!loggedInUser ? '/auth/login' : '/items'" routerLinkActive="active"
+      class="outline outline-black p-4">
+
+      {{!loggedInUser ? "Sign in and Create an Account" : "What's on Sale?"}}
+    </button>
 
   </div>
   <div> <a href=""> <img class="object-cover" src="\assets\images\banner2.png" alt="" data-aos="fade-left"
@@ -20,7 +25,21 @@
   <div class="grid grid-cols-[1.1fr,0.5fr] pt-20" data-aos="fade-up" data-aos-offset="800" data-aos-delay="50"
     data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-mirror="true" data-aos-once="false">
     <div><img src="\assets\images\carouselimg1.png" alt="" class="object-cover"></div>
-    <div class="bg-black">some text</div>
+    <div class="bg-black text-white  pl-4 pt-[15vh]">
+
+      <p class="font-bold text-[2.5rem] pb-2">DISCOVER KID’S FALL FASHION</p>
+
+      <p class="font-thin pb-4 w-[90%] text-[1.2rem]"> Most-wanted styles of the season from Kai’son, Kai’sa, Jai’lyn
+        and
+        more. </p>
+      <div class="flex justify-between w-[60%] font-thin">
+        <a href="" class="hover:underline underline-offset-[5px]">Shop Kid's Fall Designer</a>
+        <a href="" class="hover:underline underline-offset-[5px]">Explore</a>
+      </div>
+
+    </div>
+
 
   </div>
+
 </div>
