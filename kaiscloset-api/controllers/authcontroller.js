@@ -10,7 +10,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
     if (!(await user.isCorrectPassword(req.body.password))) throw new Error("Password is Incorrect", 400);
 
-    const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: '5m' });
+    const token = JWT.sign({ id: user._id }, process.env.SECRET, { expiresIn: '35m' });
 
     user.password = undefined;
 
@@ -28,7 +28,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
     const newUser = await User.create(data);
 
-    const token = JWT.sign({ id: newUser._id }, process.env.SECRET, { expiresIn: '5m' });
+    const token = JWT.sign({ id: newUser._id }, process.env.SECRET, { expiresIn: '35m' });
 
     newUser.password = undefined;
     res.status(201).json({
@@ -45,7 +45,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     if (!token || !token.startsWith('Bearer')) throw new AppError('You must be logged in to access this resource', 400);
 
     let encryptedString = token.split(' ')[1];
-    const decoded = jwt.verify(encryptedString, process.env.JWT_SECRET);
+    const decoded = JWT.verify(encryptedString, process.env.SECRET, { expiresIn: '1m' });
     if (!decoded) throw new AppError('Token is missing or invalid', 400);
 
     const user = await User.findById(decoded.id);

@@ -20,7 +20,7 @@ const globalErrorHandler = require("./controllers/errorcontroller");
 
 
 
-app.use(cors());
+app.use(cors('*'));
 
 
 app.use(express.json());
